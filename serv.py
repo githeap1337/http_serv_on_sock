@@ -4,7 +4,9 @@ import socket
 
 
 def main():
-    server = socket.create_server(('127.0.0.1', 8000))
+    # server = socket.create_server(('127.0.0.1', 8000))
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind(('127.0.0.1', 8000))
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     server.listen(10)
