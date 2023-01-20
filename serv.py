@@ -14,11 +14,12 @@ def main():
     client_socket, address = server.accept()
     print(server.accept())
     received_data = client_socket.recv(1024).decode('utf-8')
-    print('get data from socket: ', received_data)
+    print('get response:\n', received_data)
     response = 'HTTP/1.1 200 OK\nContent-type: text/html; charset=utf-8\n\n'
-    with open('packages.txt', 'w') as packs:
-        for pack in packs:
-            response += pack.strip() + '<br />>'
+    with open('packages.txt', 'r') as packs:
+        packs_text = packs.readlines()
+        for pack in packs_text:
+            response += pack.strip() + '<br />'
     client_socket.send(response.encode('utf-8'))
     client_socket.shutdown(socket.SHUT_RDWR)
     server.shutdown(socket.SHUT_RDWR)
